@@ -1,4 +1,5 @@
 #include <iostream>
+#include "FeatureTree.h"
 using namespace std;
 
 int main() {
@@ -6,7 +7,6 @@ int main() {
   int features;
   int algo;
   cout << "Welcome to Isabelle's Feature Selection Algorithm\n" << endl;
-
   cout << "Please enter the total number of features: ";
   cin >> features;
 
@@ -16,8 +16,10 @@ int main() {
   cin.ignore();
   cin >> algo;
 
+
+  FeatureTree newTree(features);
   if (algo == 1) {
-    cout << "1" << endl;
+    newTree.forwardSelection();
   } else if (algo == 2) {
     cout << "2" << endl;
   } else if (algo == 3) {
