@@ -15,9 +15,9 @@ struct Node {
     accuracy = rand() % 100;
   }
 
-  void printFeature() {
+  void printFeatureandAccuracy() {
     if (featureSet.size() > 0 ) {
-        cout << "Using feature(s) ";
+        cout << "\tUsing feature(s) ";
       for (int i = 0; i < featureSet.size(); i++) {
         if (i == 0)
           cout << "{";
@@ -31,10 +31,23 @@ struct Node {
       cout << " accuracy is " << accuracy << "%" << endl;
 
     } else {
-      cout << "Using no features and \"random\" evaluation, I get an accuracy of " << accuracy << "%" << endl;
+      cout << "Using no features and \"random\" evaluation, I get an accuracy of " << accuracy << "%\n" << endl;
     }
   }
-  
+
+  void printSet() {
+     if (featureSet.size() > 0 ) {
+      for (int i = 0; i < featureSet.size(); i++) {
+        if (i == 0)
+          cout << "{";
+        cout << featureSet.at(i);
+        if (i == featureSet.size()-1) 
+          cout << "}";
+        else 
+          cout << ",";
+      }
+    }
+  }
 };
 
 
@@ -42,10 +55,9 @@ struct Node {
 class FeatureTree {
 
   private:
-    Node* initialState;
     int numFeatures;
     double maxAccuracy;
-    Node* bestFeatureSet;
+    Node* bestNode;
   
 
   public:
