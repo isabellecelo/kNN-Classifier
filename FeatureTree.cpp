@@ -9,12 +9,15 @@ FeatureTree::FeatureTree(int features) {
 
 
 void FeatureTree::forwardSelection() {
+  initialState = new Node();
+  initialState->printFeature();
+
+    // if (numFeatures > 0) {
+    //   ""
+    // }
+
+    // for (int i = 1; i <= numFeatures; i++) {
+
+
   
-  
-
-
-
-  if (bestFeatureSet == nullptr) {
-    cout << "The best feature subset is using no features with an accuracy of " << maxAccuracy << "%" << endl;
-  }
 }
