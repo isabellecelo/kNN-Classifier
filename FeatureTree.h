@@ -38,6 +38,7 @@ struct Node {
 };
 
 
+
 class FeatureTree {
 
   private:
@@ -50,6 +51,7 @@ class FeatureTree {
   public:
     FeatureTree(int);
     void forwardSelection();
+    bool duplicatesExist(vector<int>, int);
 
 
 

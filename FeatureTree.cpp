@@ -12,12 +12,25 @@ void FeatureTree::forwardSelection() {
   initialState = new Node();
   initialState->printFeature();
 
+
     // if (numFeatures > 0) {
-    //   ""
+    //   cout << "Beginning search" << endl;
+
+    //   for (int i = 1; i <= numFeatures; i++) {
+    //     for (int i = )
+    //   }
     // }
 
-    // for (int i = 1; i <= numFeatures; i++) {
-
-
   
+}
+
+bool FeatureTree::duplicatesExist(vector<int> set, int firstNum) {
+  
+  for (int i = 0; i < set.size(); i++) {
+    if (firstNum == set.at(i)) 
+      return true;
+  }
+
+  return false;
+
 }
