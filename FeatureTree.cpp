@@ -12,6 +12,7 @@ void FeatureTree::forwardSelection() {
   curr->evaluate();
   curr->printFeatureandAccuracy();
   int featuresReached = 0;
+  bestNode = curr;
 
     if (numFeatures > 0) {
       cout << "Beginning search" << endl;
@@ -59,6 +60,64 @@ void FeatureTree::forwardSelection() {
     cout << ", which has an accuracy of " << bestNode->accuracy;
 
   
+}
+
+void FeatureTree::backwardElimation() {
+  Node* curr = new Node();
+  for (int i = 0; i < numFeatures; i++) {
+    curr->featureSet.push_back(i+1);
+  }
+  
+  curr->evaluate();
+  curr->printFeatureandAccuracy();
+  int featuresReached = numFeatures;
+  bestNode = curr;
+
+  if (numFeatures > 0) {
+
+      while (featuresReached > 0) {
+        int localMaxAcc = 0;
+        Node* localBestNode = nullptr;
+
+        for (int i = 0; i < curr->featureSet.size(); i++) {
+
+           Node* nextChild = new Node();
+            // set the child's featureSet to the current feature set
+            nextChild->featureSet = curr->featureSet;
+            // add the next feature to the child
+            nextChild->featureSet.erase(nextChild->featureSet.begin()+i);
+            // add the child as a child of curr
+            curr->children.push_back(nextChild);
+            nextChild->evaluate();
+            if (nextChild->accuracy > maxAccuracy) {
+              maxAccuracy = nextChild->accuracy;
+              bestNode = nextChild;
+            }
+            if (nextChild->accuracy > localMaxAcc) {
+              localMaxAcc = nextChild->accuracy;
+              localBestNode = nextChild;
+            }
+            nextChild->printFeatureandAccuracy();
+        }
+
+        curr = localBestNode;
+        cout << "\nFeature set ";
+        curr->printSet();
+        cout << " was best, accuracy is " << curr->accuracy << "%\n" << endl;
+        if (localMaxAcc < maxAccuracy) {
+          cout << "(Warning, accuracy has decreased !!)" << endl;
+        }
+        
+        featuresReached--;
+      }
+    }
+
+    cout << "Finished search!! The best feature subset is: ";
+    bestNode->printSet();
+    cout << ", which has an accuracy of " << bestNode->accuracy;
+
+
+
 }
 
 bool FeatureTree::duplicatesExist(vector<int> set, int firstNum) {

@@ -31,7 +31,7 @@ struct Node {
       cout << " accuracy is " << accuracy << "%" << endl;
 
     } else {
-      cout << "Using no features and \"random\" evaluation, I get an accuracy of " << accuracy << "%\n" << endl;
+      cout << "\tUsing no features and \"random\" evaluation, I get an accuracy of " << accuracy << "%\n" << endl;
     }
   }
 
@@ -46,6 +46,8 @@ struct Node {
         else 
           cout << ",";
       }
+    } else {
+      cout << "{}";
     }
   }
 };
@@ -63,6 +65,7 @@ class FeatureTree {
   public:
     FeatureTree(int);
     void forwardSelection();
+    void backwardElimation();
     bool duplicatesExist(vector<int>, int);
 
 

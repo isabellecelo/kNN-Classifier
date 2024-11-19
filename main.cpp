@@ -21,7 +21,7 @@ int main() {
   if (algo == 1) {
     newTree.forwardSelection();
   } else if (algo == 2) {
-    cout << "2" << endl;
+    newTree.backwardElimation();
   } else if (algo == 3) {
     cout << "3" << endl;
   }
