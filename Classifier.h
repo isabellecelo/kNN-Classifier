@@ -10,17 +10,20 @@ using namespace std;
 class Classifier {
 
   private:
-  double min1;
-  double min2;
-  double max1;
-  double max2;
-  vector<double> class1Train;
-  vector<double> class2Train;
+  double min;
+  double max;
+  int numFeatures;
+
+  protected:
+  vector< vector<double> > training;
+  string fileName;
   
   public:
-  void Train(string fileName);
-  int Test(double);
-  void normalize();
+  Classifier(int, string);
+  void Train();
+  int Test(vector<double>);
+  double normalize(double);
+  void findNormVals();
   double asciiConversion(string);
 
   

@@ -1,6 +1,7 @@
 #include <iostream>
 #include "FeatureTree.h"
 #include "Classifier.h"
+#include "Validator.h"
 using namespace std;
 
 int main() {
@@ -27,8 +28,30 @@ int main() {
   //   cout << "3" << endl;
   // }
 
-  Classifier hi;
-  hi.Train("small-test-dataset.txt");
+  // Classifier hi(10,"small-test-dataset.txt" );
+  // hi.Train();
+  // vector<double> wow;
+  // wow.push_back(0);
+  // wow.push_back(5.07);
+  // wow.push_back(3.15);
+  // wow.push_back(1.29);
+  // wow.push_back(0.577);
+  // wow.push_back(2.73);
+  // wow.push_back(1.91);
+  // wow.push_back(4.61);
+  // wow.push_back(3.32);
+  // wow.push_back(4.03);
+  // wow.push_back(2.85);
+
+  // cout << hi.Test(wow) << endl;
+
+  vector<int> ew;
+  ew.push_back(3);
+  ew.push_back(5);
+  ew.push_back(7);
+
+  Validator yum(10, ew, "small-test-dataset.txt");
+  cout << yum.accuracy() << endl;
 
 
 
