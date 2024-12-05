@@ -3,6 +3,9 @@
 #include <cstdlib>
 using namespace std;
 
+#ifndef FEATURETREE_H
+#define FEATURETREE_H
+
 
 struct Node {
   Node* parent;
@@ -71,3 +74,5 @@ class FeatureTree {
 
 
 };
+
+#endif
