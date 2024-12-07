@@ -8,7 +8,7 @@ using namespace std;
 
 
 
-class Validator : Classifier {
+class Validator : public Classifier {
 
   private: 
   vector<int> featureSubset;

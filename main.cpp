@@ -35,11 +35,17 @@ int main() {
   smallSubset.push_back(7);
 
   Validator small(10, smallSubset, "small-test-dataset.txt");
-  clock_t start_time = clock();
+  clock_t start_time1 = clock();
+  small.Train();
+  clock_t end_time1 = clock();
+  double elapsed_time1 = double(end_time1 - start_time1) / CLOCKS_PER_SEC;
+  cout << "Time spent on training small-test-dataset: " << elapsed_time1 << " seconds" << endl;
+
+  clock_t start_time2 = clock();
   cout << "Using feature subset {3,5,7}, small-test-dataset has an accuracy of: " << small.accuracy() << endl;
-  clock_t end_time = clock();
-  double elapsed_time = double(end_time - start_time) / CLOCKS_PER_SEC;
-  cout << "Time spent on small-test-dataset's accuracy: " << elapsed_time << " seconds" << endl;
+  clock_t end_time2 = clock();
+  double elapsed_time2 = double(end_time2 - start_time2) / CLOCKS_PER_SEC;
+  cout << "Time spent on small-test-dataset's accuracy: " << elapsed_time2 << " seconds" << endl;
 
   cout << endl;
 
@@ -49,11 +55,18 @@ int main() {
   largeSubset.push_back(27);
 
   Validator large(40, largeSubset, "large-test-dataset.txt");
-  start_time = clock();
+  clock_t start_time3 = clock();
+  large.Train();
+  clock_t end_time3 = clock();
+  double elapsed_time3 = double(end_time3 - start_time3) / CLOCKS_PER_SEC;
+  cout << "Time spent training large-test-dataset: " << elapsed_time3 << " seconds" << endl;
+
+
+  clock_t start_time4 = clock();
   cout << "Using feature subset {1,15,27}, large-test-dataset has an accuracy of: " << large.accuracy() << endl;
-  end_time = clock();
-  elapsed_time = double(end_time - start_time) / CLOCKS_PER_SEC;
-  cout << "Time spent on large-test-dataset's accuracy: " << elapsed_time << " seconds" << endl;
+  clock_t end_time4 = clock();
+  double elapsed_time4 = double(end_time4 - start_time4) / CLOCKS_PER_SEC;
+  cout << "Time spent on large-test-dataset's accuracy: " << elapsed_time4 << " seconds" << endl;
   
   cout << endl;
 

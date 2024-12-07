@@ -7,7 +7,6 @@ Validator::Validator(int numFeatures, vector<int> subset, string fileName) : Cla
 }
 
 double Validator::accuracy() {
-  Train();
   double accuracy = 0;
   for (int i = 0; i < training.size(); i++) {
     if (Test(i))
