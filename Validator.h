@@ -17,7 +17,7 @@ class Validator : Classifier {
   public:
   Validator(int, vector<int>, string);
   double accuracy();
-  bool test(int ID);
+  bool Test(int ID);
 
 
 };

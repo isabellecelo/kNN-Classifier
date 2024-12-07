@@ -10,30 +10,30 @@ double Validator::accuracy() {
   Train();
   double accuracy = 0;
   for (int i = 0; i < training.size(); i++) {
-    if (test(i))
+    if (Test(i))
       accuracy++;
   }
 
-  cout << "training size:" << training.size() << endl;
   accuracy = accuracy/training.size();
   return accuracy;
 }
 
-bool Validator::test(int ID) {
+bool Validator::Test(int ID) {
   double minDistance = numeric_limits<double>::max();
-  int currClass = 0;
-  double currDistance = 0;
-  double featureSubtract = 0;
+  int currClass = -1;
+  double currDistance;
+  double featureSubtract;
   for (int i = 0; i < training.size(); i++) {
+    featureSubtract = 0;
+    currDistance = 0;
     if (i == ID) {
       continue;
     }
 
     for (int j = 0; j < featureSubset.size(); j++) {
       int featureNum = featureSubset.at(j);
-      featureSubtract += training.at(i).at(featureNum)-training.at(ID).at(featureNum);
-      featureSubtract = pow(featureSubtract, 2);
-      currDistance += featureSubtract;
+      featureSubtract = training.at(i).at(featureNum)-training.at(ID).at(featureNum);
+      currDistance += pow(featureSubtract, 2);
     }
     currDistance = sqrt(currDistance); 
     if (currDistance < minDistance) {

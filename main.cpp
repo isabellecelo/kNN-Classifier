@@ -2,6 +2,7 @@
 #include "FeatureTree.h"
 #include "Classifier.h"
 #include "Validator.h"
+#include <ctime>
 using namespace std;
 
 int main() {
@@ -27,31 +28,34 @@ int main() {
   // } else if (algo == 3) {
   //   cout << "3" << endl;
   // }
+  cout << endl;
+  vector<int> smallSubset;
+  smallSubset.push_back(3);
+  smallSubset.push_back(5);
+  smallSubset.push_back(7);
 
-  // Classifier hi(10,"small-test-dataset.txt" );
-  // hi.Train();
-  // vector<double> wow;
-  // wow.push_back(0);
-  // wow.push_back(5.07);
-  // wow.push_back(3.15);
-  // wow.push_back(1.29);
-  // wow.push_back(0.577);
-  // wow.push_back(2.73);
-  // wow.push_back(1.91);
-  // wow.push_back(4.61);
-  // wow.push_back(3.32);
-  // wow.push_back(4.03);
-  // wow.push_back(2.85);
+  Validator small(10, smallSubset, "small-test-dataset.txt");
+  clock_t start_time = clock();
+  cout << "Using feature subset {3,5,7}, small-test-dataset has an accuracy of: " << small.accuracy() << endl;
+  clock_t end_time = clock();
+  double elapsed_time = double(end_time - start_time) / CLOCKS_PER_SEC;
+  cout << "Time spent on small-test-dataset's accuracy: " << elapsed_time << " seconds" << endl;
 
-  // cout << hi.Test(wow) << endl;
+  cout << endl;
 
-  vector<int> ew;
-  ew.push_back(3);
-  ew.push_back(5);
-  ew.push_back(7);
+  vector<int> largeSubset;
+  largeSubset.push_back(1);
+  largeSubset.push_back(15);
+  largeSubset.push_back(27);
 
-  Validator yum(10, ew, "small-test-dataset.txt");
-  cout << yum.accuracy() << endl;
+  Validator large(40, largeSubset, "large-test-dataset.txt");
+  start_time = clock();
+  cout << "Using feature subset {1,15,27}, large-test-dataset has an accuracy of: " << large.accuracy() << endl;
+  end_time = clock();
+  elapsed_time = double(end_time - start_time) / CLOCKS_PER_SEC;
+  cout << "Time spent on large-test-dataset's accuracy: " << elapsed_time << " seconds" << endl;
+  
+  cout << endl;
 
 
 
