@@ -18,7 +18,6 @@ void FeatureTree::forwardSelection() {
   curr->printFeatureandAccuracy();
   int featuresReached = 0;
   bestNode = curr;
-  cout << "2" << endl;
 
     if (numFeatures > 0) {
       cout << "Beginning search" << endl;
@@ -85,7 +84,7 @@ void FeatureTree::backwardElimation() {
   if (numFeatures > 0) {
 
       while (featuresReached > 0) {
-        int localMaxAcc = 0;
+        double localMaxAcc = 0;
         Node* localBestNode = nullptr;
 
         for (int i = 0; i < curr->featureSet.size(); i++) {

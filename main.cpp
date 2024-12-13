@@ -43,12 +43,13 @@ int main() {
     cout << "3" << endl;
   }
   cout << endl;
+
   // vector<int> smallSubset;
   // smallSubset.push_back(3);
   // smallSubset.push_back(5);
   // smallSubset.push_back(7);
 
-  // Validator small(10, smallSubset, "small-test-dataset.txt");
+  // Validator small(10, smallSubset, "small-test-dataset.txt", classes);
   // clock_t start_time1 = clock();
   // small.Train();
   // clock_t end_time1 = clock();
@@ -68,7 +69,7 @@ int main() {
   // largeSubset.push_back(15);
   // largeSubset.push_back(27);
 
-  // Validator large(40, largeSubset, "large-test-dataset.txt");
+  // Validator large(40, largeSubset, "large-test-dataset.txt", classes);
   // clock_t start_time3 = clock();
   // large.Train();
   // clock_t end_time3 = clock();
