@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <cstdlib>
+#include "Validator.h"
+#include "Classifier.h"
 using namespace std;
 
 #ifndef FEATURETREE_H
@@ -13,9 +15,12 @@ struct Node {
   double accuracy;
   vector<int> featureSet;
   
+  
 
-  void evaluate() {
-    accuracy = rand() % 100;
+  void evaluate(int numFeatures, string fileName, vector<int> classes) {
+    Validator newValidator(numFeatures, featureSet, fileName, classes);
+    newValidator.Train();
+    accuracy =  newValidator.accuracy()*100;
   }
 
   void printFeatureandAccuracy() {
@@ -63,13 +68,15 @@ class FeatureTree {
     int numFeatures;
     double maxAccuracy;
     Node* bestNode;
+    string fileName;
+    vector<int> classes;
   
 
   public:
-    FeatureTree(int);
+    FeatureTree(int, string, vector<int>&);
     void forwardSelection();
     void backwardElimation();
-    bool duplicatesExist(vector<int>, int);
+    bool duplicatesExist(vector<int>&, int);
 
 
 

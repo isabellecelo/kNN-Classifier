@@ -5,13 +5,14 @@
 using namespace std;
 
 
-Classifier::Classifier(int features, string file) {
+Classifier::Classifier(int features, string file, vector<int> classes) {
   numFeatures = features;
   fileName = file;
   for (int i = 0; i <= features; i++) {
     mins.push_back(numeric_limits<double>::max());
     maxes.push_back(numeric_limits<double>::min());
   }
+  this->classes = classes;
 
 }
 
@@ -30,7 +31,7 @@ void Classifier::Train() {
 
     while (file >> stringVal) {
     num = asciiConversion(stringVal);
-    if (num == 1) {
+    if (classes.at(0) == num) {
       vector<double> set1;
       set1.push_back(num);
       for (int i = 1; i <= numFeatures; i++) {
@@ -41,7 +42,7 @@ void Classifier::Train() {
       }
 
       training.push_back(set1);
-     } else if (num == 2) {
+     } else if (classes.at(1) == num) {
       vector<double> set2;
       set2.push_back(num);
       for (int i = 1; i <= numFeatures; i++) {
@@ -76,10 +77,10 @@ void Classifier::findNormVals() {
   
   while (file >> stringVal) {
     num = asciiConversion(stringVal);
-    if (num == 1.0000000) {
+    if (num == classes.at(0)) {
       currFeature = 1;
       continue;
-    } else if (num == 2.00000) {
+    } else if (num == classes.at(1)) {
       currFeature = 1;
       continue;
     }
@@ -97,7 +98,7 @@ double Classifier::normalize(double num, int feature) {
   return (num-mins.at(feature)) / (maxes.at(feature)-mins.at(feature));
 }
 
-int Classifier::Test(vector<double> test) {
+int Classifier::Test(vector<double>& test) {
 
   for (int i = 1; i < test.size(); i++) {
     test.at(i) = normalize(test.at(i),i);

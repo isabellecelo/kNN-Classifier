@@ -2,8 +2,9 @@
 #include <iostream>
 using namespace std;
 
-Validator::Validator(int numFeatures, vector<int> subset, string fileName) : Classifier(numFeatures, fileName) {
+Validator::Validator(int numFeatures, vector<int> &subset, string fileName, vector<int> classes) : Classifier(numFeatures, fileName, classes) {
   featureSubset = subset; 
+
 }
 
 double Validator::accuracy() {

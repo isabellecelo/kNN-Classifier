@@ -1,24 +1,30 @@
 #include "FeatureTree.h"
+#include "Validator.h"
+#include "Classifier.h"
+using namespace std;
 
-FeatureTree::FeatureTree(int features) {
+FeatureTree::FeatureTree(int features, string fileName, vector<int> &classes) {
   numFeatures = features;
   bestNode = nullptr;
   maxAccuracy = 0;
+  this->fileName = fileName;
+  this->classes = classes;
 }
 
 
 void FeatureTree::forwardSelection() {
   Node* curr = new Node();
-  curr->evaluate();
+  curr->evaluate(numFeatures, fileName, classes);
   curr->printFeatureandAccuracy();
   int featuresReached = 0;
   bestNode = curr;
+  cout << "2" << endl;
 
     if (numFeatures > 0) {
       cout << "Beginning search" << endl;
 
       while (featuresReached < numFeatures) {
-        int localMaxAcc = 0;
+        double localMaxAcc = 0;
         Node* localBestNode = nullptr; 
         for (int i = 1; i <= numFeatures; i++) {
           
@@ -31,7 +37,7 @@ void FeatureTree::forwardSelection() {
             nextChild->featureSet.push_back(i);
             // add the child as a child of curr
             curr->children.push_back(nextChild);
-            nextChild->evaluate();
+            nextChild->evaluate(numFeatures, fileName, classes);
             if (nextChild->accuracy > maxAccuracy) {
               maxAccuracy = nextChild->accuracy;
               bestNode = nextChild;
@@ -49,15 +55,18 @@ void FeatureTree::forwardSelection() {
         cout << " was best, accuracy is " << curr->accuracy << "%" << endl;
         if (localMaxAcc < maxAccuracy) {
           cout << "(Warning, accuracy has decreased !!)" << endl;
+          break;
         }
         
         featuresReached++;
+
+        
       }
     }
 
     cout << "Finished search!! The best feature subset is: ";
     bestNode->printSet();
-    cout << ", which has an accuracy of " << bestNode->accuracy;
+    cout << ", which has an accuracy of " << bestNode->accuracy << "%";
 
   
 }
@@ -68,7 +77,7 @@ void FeatureTree::backwardElimation() {
     curr->featureSet.push_back(i+1);
   }
   
-  curr->evaluate();
+  curr->evaluate(numFeatures, fileName, classes);
   curr->printFeatureandAccuracy();
   int featuresReached = numFeatures;
   bestNode = curr;
@@ -88,7 +97,7 @@ void FeatureTree::backwardElimation() {
             nextChild->featureSet.erase(nextChild->featureSet.begin()+i);
             // add the child as a child of curr
             curr->children.push_back(nextChild);
-            nextChild->evaluate();
+            nextChild->evaluate(numFeatures, fileName, classes);
             if (nextChild->accuracy > maxAccuracy) {
               maxAccuracy = nextChild->accuracy;
               bestNode = nextChild;
@@ -114,13 +123,13 @@ void FeatureTree::backwardElimation() {
 
     cout << "Finished search!! The best feature subset is: ";
     bestNode->printSet();
-    cout << ", which has an accuracy of " << bestNode->accuracy;
+    cout << ", which has an accuracy of " << bestNode->accuracy << "%";
 
 
 
 }
 
-bool FeatureTree::duplicatesExist(vector<int> set, int firstNum) {
+bool FeatureTree::duplicatesExist(vector<int> &set, int firstNum) {
   
   for (int i = 0; i < set.size(); i++) {
     if (firstNum == set.at(i)) 

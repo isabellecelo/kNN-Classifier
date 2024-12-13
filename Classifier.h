@@ -17,11 +17,12 @@ class Classifier {
   vector<double> mins;
   vector<double> maxes;
   string fileName;
+  vector<int> classes;
   
   public:
-  Classifier(int, string);
+  Classifier(int, string, vector<int>);
   void Train();
-  int Test(vector<double>);
+  int Test(vector<double>&);
   double normalize(double,int);
   void findNormVals();
   double asciiConversion(string);

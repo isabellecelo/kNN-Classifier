@@ -14,8 +14,9 @@ class Validator : public Classifier {
   vector<int> featureSubset;
 
 
+
   public:
-  Validator(int, vector<int>, string);
+  Validator(int, vector<int>&, string, vector<int>);
   double accuracy();
   bool Test(int ID);
 
